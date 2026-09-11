@@ -47,12 +47,19 @@ function RichText({ text }: { text: string }) {
     <>
       {text.split("\n").map((line, li) => (
         <p key={li} className={cn("min-h-[0.5em]", li > 0 && "mt-1")}>
-          {line.split(/(\*\*[^*]+\*\*|_[^_]+_)/g).map((part, pi) => {
+          {line.split(/(\*\*[^*]+\*\*|\*[^*]+\*|_[^_]+_)/g).map((part, pi) => {
             if (part.startsWith("**") && part.endsWith("**")) {
               return (
                 <strong key={pi} className="font-semibold text-foreground">
                   {part.slice(2, -2)}
                 </strong>
+              );
+            }
+            if (part.startsWith("*") && part.endsWith("*") && part.length > 2) {
+              return (
+                <em key={pi} className="text-foreground/90">
+                  {part.slice(1, -1)}
+                </em>
               );
             }
             if (part.startsWith("_") && part.endsWith("_") && part.length > 2) {
@@ -91,14 +98,14 @@ function ChatTool() {
     if (!content || loading) return;
 
     const userMsg: Msg = { id: crypto.randomUUID(), role: "user", content };
-    const historyLength = messages.length;
+    const history = messages.map((m) => ({ role: m.role, content: m.content }));
     setMessages((prev) => [...prev, userMsg]);
     setInput("");
     setLoading(true);
     setError(null);
 
     try {
-      const reply = await chatReply(content, historyLength);
+      const reply = await chatReply(content, history);
       setMessages((prev) => [
         ...prev,
         { id: crypto.randomUUID(), role: "assistant", content: reply },
