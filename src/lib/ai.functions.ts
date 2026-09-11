@@ -62,7 +62,7 @@ export const summarizeMeetingFn = createServerFn({ method: "POST" })
           RESPONSIBLE_AI,
           "",
           "Output plain text with these exact uppercase headings, in this order, with a blank line between sections:",
-          "MEETING SUMMARY (2-4 sentences)",
+          "MEETING SUMMARY (2-4 sentences describing the meeting itself only — no disclaimers or meta commentary)",
           "KEY DISCUSSION POINTS (bullets with •)",
           "DECISIONS MADE (bullets with •)",
           "ACTION ITEMS (numbered, format: 'Person — Task — Deadline or No deadline stated')",
