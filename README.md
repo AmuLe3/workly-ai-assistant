@@ -1,368 +1,241 @@
 # Workly AI Assistant
 
-Build a complete modern responsive web application called “Workly AI – AI Workplace Productivity Assistant”.
+Workly AI Assistant is a modern AI-powered workplace productivity platform designed to help users automate common professional tasks from one integrated dashboard.
 
-PROJECT PURPOSE:
+The application combines five AI-powered productivity tools in a single responsive interface:
 
-Workly AI is a single integrated AI-powered productivity platform designed to help professionals, students, small businesses, and teams automate common workplace tasks.
+- Smart Email Generator
+- Meeting Notes Summarizer
+- AI Task Planner
+- AI Research Assistant
+- AI Workplace Chat
 
-This is ONE application with multiple tools inside one dashboard, not separate websites.
+## Project Overview
 
-MAIN FEATURES:
+Workly AI was created to demonstrate practical AI implementation, prompt engineering, workplace problem solving, responsible AI usage, and modern UI/UX design.
 
-1. Smart Email Generator
+The platform is designed for professionals, students, small businesses, and teams who want to reduce time spent on repetitive workplace tasks and improve productivity.
 
-Create a professional AI email generation tool.
+## Features
 
-Inputs:
+### 1. Smart Email Generator
 
-- Recipient / audience
+Generates professional workplace emails using user-provided information and tone preferences.
 
-- Email purpose
+Supported tones include:
 
-- Main message or context
+- Formal
+- Friendly
+- Professional
+- Persuasive
 
-- Tone selector:
+Users can copy, edit, regenerate, or clear generated email content.
 
-  - Formal
+### 2. Meeting Notes Summarizer
 
-  - Friendly
+Transforms meeting notes or transcripts into structured and useful information.
 
-  - Professional
+Generated outputs include:
 
-  - Persuasive
+- Meeting summary
+- Key discussion points
+- Decisions made
+- Action items
+- Responsible people
+- Deadlines and dates
+- Follow-up items
 
-- Optional additional instructions
+### 3. AI Task Planner
 
-Include a “Generate Email” button.
+Helps users organise and prioritise tasks by creating practical daily or weekly schedules.
 
-Generated output should contain:
+Features include:
 
-- Suggested subject line
+- Priority levels
+- Estimated task durations
+- Daily and weekly planning
+- Suggested time blocks
+- Workload recommendations
 
-- Email body
+### 4. AI Research Assistant
 
-- Professional sign-off
+Provides structured AI-generated research assistance based on a topic and guiding research question.
 
-Allow the user to:
+Generated outputs may include:
 
-- Copy the generated email
+- Topic overview
+- Key insights
+- Benefits and opportunities
+- Risks and challenges
+- Practical applications
+- Important considerations
+- Recommendations and next steps
+- Questions for further research
+- Verification notice
 
-- Edit the generated output
+### 5. AI Workplace Chat
 
-- Regenerate the response
+Provides an interactive AI workplace assistant that responds to user questions and considers the context and constraints provided by the user.
 
-- Clear the form
+Example use cases include:
 
-Include a small reminder:
+- Presentation preparation
+- Meeting preparation
+- Workplace communication
+- Workload organisation
+- Project planning
+- Brainstorming
+- Professional development
+- Explaining workplace concepts
 
-“AI-generated content may require human review before sending.”
+## Problem Being Solved
 
-2. Meeting Notes Summarizer
+Professionals and small teams often spend significant time completing repetitive workplace tasks such as drafting emails, processing meeting notes, organising workloads, researching topics, and preparing professional communication.
 
-Allow users to paste long meeting notes or transcripts.
+Workly AI brings these capabilities together into one platform, allowing users to access multiple AI-powered productivity tools from a single dashboard.
 
-Include a “Summarize Meeting” button.
+## AI Implementation
 
-Generate structured output containing:
+Workly AI uses AI-powered backend functionality to generate context-aware responses for workplace productivity tasks.
 
-- Meeting Summary
+AI functionality is used for features including:
 
-- Key Discussion Points
+- Meeting note summarisation
+- Research assistance
+- Workplace chat
 
-- Decisions Made
+Structured prompt engineering is used to guide the AI towards relevant, organised, and useful responses based on the information supplied by the user.
 
-- Action Items
+AI credentials are handled server-side and are not exposed directly in frontend code.
 
-- Responsible Person
+## Prompt Engineering
 
-- Deadlines / Dates
+Structured prompts are used to define:
 
-- Follow-up Items
+- The role of the AI assistant
+- The user's workplace context
+- Required output structure
+- Important constraints
+- Responsible AI behaviour
 
-Allow users to copy and edit the generated result.
+For example, the Meeting Notes Summarizer is instructed to distinguish between decisions, action items, responsible people, deadlines, and follow-up activities instead of treating all extracted information as the same type of content.
 
-3. AI Task Planner
+The Research Assistant is instructed to answer the user's actual research question while avoiding fabricated citations or unsupported claims.
 
-Allow users to enter a list of tasks.
+## Responsible AI
 
-Inputs:
+Responsible AI principles are incorporated throughout Workly AI.
 
-- Tasks
+Users are reminded that:
 
-- Deadlines
-
-- Priority
-
-- Estimated duration
-
-- Available working hours
-
-Include options for:
-
-- Daily Plan
-
-- Weekly Plan
-
-Generate a practical work schedule.
-
-Separate tasks into:
-
-- High Priority
-
-- Medium Priority
-
-- Low Priority
-
-Display suggested time blocks and task order.
-
-Include a reminder that AI schedules are recommendations and users should adjust them when circumstances change.
-
-4. AI Research Assistant
-
-Allow users to enter:
-
-- Research topic
-
-- Research question
-
-- Background/context
-
-- Desired output length
-
-Generate structured research assistance with:
-
-- Topic Overview
-
-- Key Insights
-
-- Important Considerations
-
-- Recommended Next Steps
-
-- Suggested Questions for Further Research
-
-Clearly state that AI-generated research should be verified using reliable sources.
-
-Do not present fictional references or fabricated citations as real sources.
-
-5. AI Workplace Chat
-
-Create a chatbot-style interface where users can ask workplace productivity questions.
-
-Examples:
-
-- Help me prepare for a meeting
-
-- Improve this professional message
-
-- Help me organise my workload
-
-- Brainstorm project ideas
-
-- Explain a workplace concept
-
-Display user and AI messages in a clean conversational interface.
-
-Include a text input and Send button.
-
-Add quick prompt suggestions above or below the chat input.
-
-DASHBOARD:
-
-Create a modern SaaS-style dashboard.
-
-Use a dark professional visual theme inspired by modern productivity platforms.
-
-Layout:
-
-LEFT SIDEBAR:
-
-- Workly AI logo/name
-
-- Dashboard
-
-- Email Generator
-
-- Notes Summarizer
-
-- Task Planner
-
-- Research
-
-- AI Chat
-
-Keep sidebar visible on desktop.
-
-On mobile, convert sidebar into a collapsible menu.
-
-MAIN DASHBOARD HEADER:
-
-Large welcome card containing:
-
-“Your AI Workplace Assistant”
-
-Subtitle:
-
-“Automate emails, summarize meetings, organize tasks, research smarter, and work more efficiently with AI.”
-
-Buttons:
-
-- Start with Email
-
-- Open AI Chat
-
-PRODUCTIVITY STATS:
-
-Display three attractive statistic cards:
-
-“5 AI Tools”
-
-“Work Smarter”
-
-“Human Review Recommended”
-
-Do not make unsupported claims such as exact hours saved or percentage improvements.
-
-PRODUCTIVITY TOOL CARDS:
-
-Create cards for:
-
-Smart Email Generator
-
-Description:
-
-“Draft polished workplace emails with customizable tone.”
-
-Meeting Notes Summarizer
-
-Description:
-
-“Turn meeting notes into summaries, decisions and action items.”
-
-AI Task Planner
-
-Description:
-
-“Organize and prioritize your daily or weekly workload.”
-
-Research Assistant
-
-Description:
-
-“Explore workplace topics and generate structured insights.”
-
-AI Workplace Chat
-
-Description:
-
-“Ask questions and get AI-powered workplace assistance.”
-
-Each card should have an icon and an “Open Tool” button.
-
-UI / UX REQUIREMENTS:
-
-Use:
-
-- Dark navy/charcoal background
-
-- Purple, pink or coral gradient accents
-
-- Rounded cards
-
-- Soft shadows
-
-- Modern typography
-
-- Clear spacing
-
-- Professional SaaS visual style
-
-- Subtle hover effects
-
-- Smooth transitions
-
-The application must feel professional rather than overly decorative.
-
-Ensure strong contrast and readability.
-
-Make the application fully responsive for:
-
-- Desktop
-
-- Tablet
-
-- Mobile
-
-RESPONSIBLE AI:
-
-Add a small visible notice in the interface:
-
-“AI-generated content may contain errors. Review important information before using or sharing it.”
-
-Create a Responsible AI section or modal explaining:
-
-- Users should review AI-generated content.
-
-- Sensitive or confidential information should not be entered unnecessarily.
-
-- AI output should not replace professional judgment.
-
+- AI-generated content may contain errors.
+- Important information should be reviewed before use or sharing.
+- Confidential or sensitive information should not be entered unnecessarily.
+- AI-generated output should not replace professional judgement.
 - Research information should be verified using reliable sources.
+- AI-generated schedules and recommendations may need to be adjusted to real-world circumstances.
 
-FUNCTIONAL REQUIREMENTS:
+The application is designed to encourage human review rather than presenting AI-generated information as automatically correct.
 
-All sidebar navigation items must work.
+## UI / UX
 
-Each tool should open its corresponding page or dashboard section.
+Workly AI uses a modern responsive SaaS-style dashboard.
 
-Forms must be interactive.
+The interface includes:
 
-Buttons must visibly respond when clicked.
+- Sidebar navigation
+- Professional dark theme
+- Responsive desktop and mobile layouts
+- Clear input and output sections
+- Reusable interface components
+- Interactive buttons and forms
+- Loading and response states
+- Responsible AI notices
+- Consistent visual styling across all tools
 
-Generated outputs should appear in clearly separated output panels.
+## Testing
 
-Provide realistic sample AI responses if a live AI API is not connected yet.
+The five core productivity tools were tested using realistic workplace scenarios.
 
-Do not leave buttons that appear functional but do nothing.
+Testing included:
 
-Use reusable components and maintain a consistent design system across the platform.
+- Generating professional emails using different contexts
+- Extracting decisions, action items, responsible people, and deadlines from meeting notes
+- Creating prioritised and time-blocked task schedules
+- Generating research analysis based on a specific research question
+- Testing whether the workplace chatbot responds to user constraints such as deadlines and available preparation time
 
-TECHNICAL REQUIREMENTS:
+Testing and iteration were used to improve the accuracy and relevance of AI-generated responses.
 
-Use React and modern frontend development practices.
+## Technologies Used
 
-Structure the project cleanly.
+- React
+- TypeScript
+- Lovable
+- AI model integration
+- GitHub
+- HTML
+- CSS
 
-Ensure it can be deployed as a functioning web application.
+## Project Structure
 
-Prepare the application so a real AI API can be connected later.
+The application is organised as a single integrated platform containing multiple AI-powered productivity tools.
 
-Do not expose API keys in frontend code.
+The main source code is stored in the `src` directory, with supporting public assets stored in the `public` directory.
 
-Include appropriate loading, empty and error states.
+## Running the Project Locally
 
-Add icons where helpful.
+Clone the repository:
 
-The finished result should look suitable for a professional project portfolio and assessment.
+```bash
+git clone https://github.com/AmuLe3/workly-ai-assistant.git
+```
 
-This project was built with [Lovable](https://lovable.dev).
+Navigate into the project directory:
 
-## Build with Lovable
+```bash
+cd workly-ai-assistant
+```
 
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/070b0919-dfab-4fb2-81da-f4e861c9dd7e).
+Install the required dependencies:
 
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
+```bash
+npm install
+```
 
-## Development
+Start the development server:
 
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
-
-```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
+```bash
 npm run dev
 ```
+
+Open the local development URL displayed in the terminal to use the application.
+
+## Project Status
+
+The core functionality of Workly AI has been implemented and tested across all five productivity tools.
+
+The application includes a responsive interface, functional navigation, AI-generated responses, structured output, and responsible AI safeguards.
+
+## Future Improvements
+
+Possible future improvements include:
+
+- User authentication
+- Saving previous AI-generated outputs
+- Exporting meeting summaries and task plans
+- Calendar integration
+- Email platform integration
+- Additional customisation options
+- Improved conversation history
+- Expanded accessibility features
+
+## Author
+
+**Amukelani Mhlari**
+
+GitHub: **AmuLe3**
+
+## Acknowledgements
+
+This project was developed using Lovable and AI-assisted development tools and is synchronised with GitHub for version control.
