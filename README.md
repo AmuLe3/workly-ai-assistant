@@ -16,6 +16,12 @@ Workly AI was created to demonstrate practical AI implementation, prompt enginee
 
 The platform is designed for professionals, students, small businesses, and teams who want to reduce time spent on repetitive workplace tasks and improve productivity.
 
+## Live Demo
+
+View the deployed application here:
+
+https://workly-ai-assistant.lovable.app/
+
 ## Features
 
 ### 1. Smart Email Generator
