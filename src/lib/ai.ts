@@ -209,142 +209,24 @@ export interface ResearchInput {
 }
 
 export async function generateResearch(input: ResearchInput): Promise<string> {
-  const topic = clean(input.topic) || "the topic";
-  const question = clean(input.question) || `What should we understand about ${topic}?`;
-  const depth = input.length === "Detailed" ? 5 : input.length === "Standard" ? 4 : 3;
-
-  const insights = [
-    `Definitions and scope vary across organisations, so agree on what ${topic} means in your context before comparing sources.`,
-    `Most practical guidance on ${topic} separates the underlying principle from the specific tools used to apply it.`,
-    `Constraints — budget, time, team capability and policy — usually shape outcomes more than the approach chosen.`,
-    `Measurement matters: decide up front what a good result for "${question}" would actually look like.`,
-    `Trade-offs are typical: gains in speed or cost often come with added coordination or risk elsewhere.`,
-  ].slice(0, depth);
-
-  const out = [
-    `RESEARCH BRIEF — ${titleCase(topic)}`,
-    `Guiding question: ${question}`,
-    input.context ? `Context provided: ${clean(input.context)}` : "",
-    "",
-    "TOPIC OVERVIEW",
-    `${titleCase(topic)} is best approached by first mapping what is already known inside your organisation, then filling gaps with external evidence. This brief is a structured starting point for that work — it organises thinking rather than supplying verified facts.`,
-    "",
-    "KEY INSIGHTS",
-    ...insights.map((i) => `• ${i}`),
-    "",
-    "IMPORTANT CONSIDERATIONS",
-    "• Source quality: prefer primary research, official documentation and peer-reviewed work over summaries.",
-    "• Recency: check whether the field has changed materially in the last 12–24 months.",
-    "• Bias: note who funded or published a source and what outcome they favour.",
-    "• Applicability: evidence from a different sector or company size may not transfer.",
-    "",
-    "RECOMMENDED NEXT STEPS",
-    "1. Write a one-line problem statement and the decision this research must support.",
-    "2. Collect three to five credible sources and record what each actually claims.",
-    "3. Interview one or two people with direct experience of the problem.",
-    "4. Summarise findings against your guiding question and flag remaining unknowns.",
-    "",
-    "SUGGESTED QUESTIONS FOR FURTHER RESEARCH",
-    `• What evidence would change our current view on ${topic}?`,
-    "• Which assumptions are we making that have not been tested?",
-    "• What has already been tried here, and what was the outcome?",
-    "• What is the cost of being wrong, and how would we detect it early?",
-    "",
-    "VERIFICATION NOTE",
-    "This brief contains no citations by design. Nothing above should be treated as a sourced fact — verify each point against reliable, named sources before using it in a decision or document.",
-  ]
-    .filter(Boolean)
-    .join("\n");
-
-  return simulate(out, 1000);
+  return researchFn({
+    data: {
+      topic: clean(input.topic),
+      question: clean(input.question),
+      context: input.context.trim(),
+      length: input.length,
+    },
+  });
 }
 
 /* --------------------------------- Chat ---------------------------------- */
 
-export async function chatReply(message: string, history: number): Promise<string> {
-  const m = message.toLowerCase();
+export interface ChatTurn {
+  role: "user" | "assistant";
+  content: string;
+}
 
-  if (/meeting|prepare/.test(m)) {
-    return simulate(
-      [
-        "Here's a simple way to prepare for the meeting:",
-        "",
-        "**1. Purpose** — write one sentence describing the decision or outcome you need.",
-        "**2. Agenda** — three items maximum, each with a time box and an owner.",
-        "**3. Pre-read** — share context in advance so the meeting is for discussion, not briefing.",
-        "**4. Questions** — list the two hardest questions you might be asked and draft answers.",
-        "**5. Close** — reserve the last five minutes for actions, owners and dates.",
-        "",
-        "Want me to turn your notes into an agenda? Paste them here.",
-      ].join("\n"),
-    );
-  }
-  if (/improve|rewrite|message|email|tone/.test(m)) {
-    return simulate(
-      [
-        "Happy to help sharpen it. A quick checklist I'd apply:",
-        "",
-        "• Lead with the ask or the outcome in the first line.",
-        "• Cut hedging (\"just\", \"maybe\", \"I was wondering\").",
-        "• One idea per paragraph, and bullets for anything listed.",
-        "• End with a specific next step and a date.",
-        "",
-        "Paste the message and tell me the tone you want, or use the **Email Generator** tool for a full draft.",
-      ].join("\n"),
-    );
-  }
-  if (/organis|organiz|workload|prioriti|busy|overwhelm/.test(m)) {
-    return simulate(
-      [
-        "Let's get the workload under control:",
-        "",
-        "**1.** List everything outstanding — no filtering yet.",
-        "**2.** Mark each item as High, Medium or Low based on consequence, not urgency alone.",
-        "**3.** Estimate hours honestly, then compare the total to the hours you actually have.",
-        "**4.** If it doesn't fit, decide what moves — and tell the affected people early.",
-        "",
-        "The **Task Planner** tool will build the time blocks for you once you have the list.",
-      ].join("\n"),
-    );
-  }
-  if (/brainstorm|idea|project/.test(m)) {
-    return simulate(
-      [
-        "Here are a few angles to start from:",
-        "",
-        "• **Remove a step** — what part of the current process could disappear entirely?",
-        "• **Serve the edge case** — who is currently poorly served, and what would fix that?",
-        "• **Shorten the loop** — where does feedback arrive too late to be useful?",
-        "• **Reuse an asset** — what do you already have that is underused?",
-        "",
-        "Tell me the domain and constraints and I'll narrow these down.",
-      ].join("\n"),
-    );
-  }
-  if (/explain|what is|how does|concept/.test(m)) {
-    return simulate(
-      [
-        "I can explain it in three layers — plain summary, why it matters at work, and a worked example.",
-        "",
-        "Give me the exact term or concept and, if useful, the role of the person you'll be explaining it to. I'll match the depth to that audience.",
-        "",
-        "_Do check anything factual against a reliable source before you pass it on._",
-      ].join("\n"),
-    );
-  }
-
-  return simulate(
-    [
-      history === 0
-        ? "Good question — here's how I'd approach it."
-        : "Thanks for the extra detail. Building on that:",
-      "",
-      `• Clarify the outcome you want from "${clean(message).slice(0, 80)}".`,
-      "• Identify who else is affected and what they need to know.",
-      "• Break the work into steps small enough to finish in one sitting.",
-      "• Decide the first step and when you'll do it.",
-      "",
-      "Tell me more about the situation and I'll get more specific — or open one of the tools in the sidebar for a structured draft.",
-    ].join("\n"),
-  );
+export async function chatReply(message: string, history: ChatTurn[] = []): Promise<string> {
+  const messages = [...history.slice(-16), { role: "user" as const, content: message.trim() }];
+  return chatFn({ data: { messages } });
 }
