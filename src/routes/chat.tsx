@@ -91,14 +91,14 @@ function ChatTool() {
     if (!content || loading) return;
 
     const userMsg: Msg = { id: crypto.randomUUID(), role: "user", content };
-    const historyLength = messages.length;
+    const history = messages.map((m) => ({ role: m.role, content: m.content }));
     setMessages((prev) => [...prev, userMsg]);
     setInput("");
     setLoading(true);
     setError(null);
 
     try {
-      const reply = await chatReply(content, historyLength);
+      const reply = await chatReply(content, history);
       setMessages((prev) => [
         ...prev,
         { id: crypto.randomUUID(), role: "assistant", content: reply },
