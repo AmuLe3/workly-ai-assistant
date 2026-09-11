@@ -9,11 +9,11 @@ interface OutputPanelProps {
   title: string;
   value: string;
   onChange: (next: string) => void;
-  loading?: boolean;
-  error?: string | null;
-  onRegenerate?: () => void;
+  loading?: boolean | undefined;
+  error?: string | null | undefined;
+  onRegenerate?: (() => void) | undefined;
   emptyHint: string;
-  note?: ReactNode;
+  note?: ReactNode | undefined;
 }
 
 export function OutputPanel({
