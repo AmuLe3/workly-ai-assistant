@@ -104,52 +104,8 @@ export async function generateEmail(input: EmailInput): Promise<string> {
 /* ---------------------------- Meeting notes ------------------------------ */
 
 export async function summarizeMeeting(notes: string): Promise<string> {
-  const lines = sentences(notes);
-  if (lines.length === 0) return simulate("");
-
-  const pick = (from: number, count: number) =>
-    lines.slice(from, from + count).filter(Boolean);
-
-  const decisions = lines.filter((l) => /agree|decide|approv|sign off|confirm/i.test(l));
-  const actions = lines.filter((l) => /will |action|follow up|send|prepare|review|owner/i.test(l));
-  const dates = lines.filter((l) => /monday|tuesday|wednesday|thursday|friday|week|month|by |deadline|\d{1,2}\//i.test(l));
-
-  const out = [
-    "MEETING SUMMARY",
-    lines.slice(0, 3).join(" ") ||
-      "The team met to review current progress and align on the next steps.",
-    "",
-    "KEY DISCUSSION POINTS",
-    ...(pick(0, 5).length ? pick(0, 5) : ["General progress review"]).map((l) => `• ${l}`),
-    "",
-    "DECISIONS MADE",
-    ...(decisions.length
-      ? decisions.map((l) => `• ${l}`)
-      : ["• No formal decisions were recorded in these notes."]),
-    "",
-    "ACTION ITEMS",
-    ...(actions.length
-      ? actions.map((l, i) => `${i + 1}. ${l}`)
-      : ["1. No explicit action items were detected — confirm ownership with attendees."]),
-    "",
-    "RESPONSIBLE PEOPLE",
-    ...(actions.length
-      ? actions.slice(0, 4).map((l) => {
-          const name = l.match(/\b([A-Z][a-z]+)\b/);
-          return `• ${name ? name[1] : "Unassigned"} — ${l.slice(0, 90)}`;
-        })
-      : ["• Owners not stated in the notes."]),
-    "",
-    "DEADLINES / DATES",
-    ...(dates.length ? dates.map((l) => `• ${l}`) : ["• No dates were mentioned."]),
-    "",
-    "FOLLOW-UP ITEMS",
-    "• Circulate this summary to all attendees for correction.",
-    "• Confirm an owner and due date for every action item above.",
-    "• Schedule the next check-in and add outstanding items to its agenda.",
-  ].join("\n");
-
-  return simulate(out, 1100);
+  if (!notes.trim()) return "";
+  return summarizeMeetingFn({ data: { notes: notes.trim() } });
 }
 
 /* ------------------------------- Planner --------------------------------- */
